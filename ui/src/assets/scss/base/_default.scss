@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.section__title {
+  padding-top: 44px;
+  text-align: center;
+  font-family: 'Gothic A1', sans-serif;
+  @include font(2.8rem, 3.5rem, 700, normal, normal);
+  color: $text-color-main;
+}
+
+.error-message {
+  padding-left: 10px;
+  color: red;
+  font-family: 'Gothic A1', sans-serif;
+  @include font(1.2rem, 2rem, 400, normal, normal);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;500;600;700;800;900&family=Roboto:ital@0;1&display=swap');
