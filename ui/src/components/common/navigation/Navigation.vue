@@ -32,10 +32,14 @@
   margin-left: 123px;
   max-width: 197px;
   min-height: 38px;
+
+  @include media-tablet {
+    margin-left: 0px;
+  }
 }
 
 .navigation___menu {
-  width: 647px;
+  width: 45%;
 }
 
 .navigation___list {
@@ -49,6 +53,7 @@
 }
 
 .navigation__link {
+  justify-content: space-between;
   font-family: 'Roboto', sans-serif;
   @include font(1.8rem, normal, 400, normal, normal);
   text-transform: uppercase;

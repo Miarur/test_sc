@@ -172,6 +172,10 @@ const formSubmit = async () => {
   justify-content: space-between;
   align-items: center;
   gap: 15px 14px;
+
+  @include media-tablet {
+    flex-direction: column;
+  }
 }
 
 .button__group {

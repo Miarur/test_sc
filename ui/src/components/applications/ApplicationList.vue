@@ -21,6 +21,8 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/scss/abstract/variables';
+@import '@/assets/scss/abstract/mixins';
 .applications__wrapper {
   margin: 0 auto;
   padding: 45px 0 60px 0;
@@ -31,5 +33,9 @@ defineProps({
   align-items: center;
   justify-content: space-between;
   gap: 45px 96px;
+
+  @include media-tablet {
+    flex-direction: column;
+  }
 }
 </style>

@@ -36,6 +36,11 @@
   text-align: center;
   color: $color-white;
   text-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.15);
+
+  @include media-tablet {
+    font-family: 'Gothic A1', sans-serif;
+    @include font(5.0rem, 5.5rem, 700, normal, normal);
+  }
 }
 
 .welcome__subtitle {

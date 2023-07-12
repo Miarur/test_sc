@@ -51,9 +51,11 @@
           cardSize="small"
           descriptionSize="small"
         >
-        <Button color="blue" type="button">
-          {{ item.buttonText }}
-        </Button>
+        <div class="button__position">
+          <Button color="blue" type="button">
+            {{ item.buttonText }}
+          </Button>
+        </div>
         </CardContent>
       </div>
 
@@ -93,7 +95,7 @@ import {
 
 .about__block {
   margin: 0 auto;
-  padding: 102px 0;
+  padding: 102px 20px;
   max-width: 1440px;
 }
 
@@ -104,11 +106,15 @@ import {
 
 .buttons__group {
   margin-top: 30px;
-  max-width: 423px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0 23px;
+
+  @include media-tablet {
+    justify-content: space-between;
+  }
 }
 
 .frameworks__block {
@@ -129,7 +135,7 @@ import {
 }
 
 .proposals__block {
-  padding-bottom: 44px;
+  padding: 0 20px;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
@@ -137,9 +143,16 @@ import {
   justify-content: center;
   max-width: 1440px;
   background: #F5F7FA;
+
+  @include media-tablet {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 40px 0;
+  }
 }
 
 .applications__block {
+  padding: 0 20px;
   margin: 0 auto;
   max-width: 1440px;
   background: #F5F7FA;
@@ -147,7 +160,7 @@ import {
 
 .form__block {
   margin: 0 auto;
-  padding-bottom: 60px;
+  padding: 0px 20px 60px 20px;
   max-width: 1440px;
   background-color: $color-white;
 }

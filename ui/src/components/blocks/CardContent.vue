@@ -48,6 +48,12 @@ defineProps({
   flex-wrap: wrap;
   justify-content: center;
   gap: 0 40px;
+
+  @include media-tablet {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px 0px;
+  }
 }
 
 .card__block_reverse {
@@ -55,8 +61,13 @@ defineProps({
   flex-direction: row-reverse;
   flex-wrap: wrap;
   justify-content: center;
-  max-height: 227px;
+  min-height: 227px;
   gap: 0 20px;
+
+  @include media-tablet {
+    margin: 0 auto;
+    flex-direction: column-reverse;
+  }
 }
 
 .card__block_reverse-odd {
@@ -67,6 +78,12 @@ defineProps({
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05);
   &:nth-of-type(2n - 1) {
     flex-direction: row-reverse;
+  }
+
+  @include media-tablet {
+    &:nth-of-type(2n - 1) {
+      flex-direction: column-reverse;
+    }
   }
 }
 .card__block_reverse-odd .card__image {
@@ -79,12 +96,26 @@ defineProps({
   display: flex;
   flex-direction: column;
   max-width: 595px;
+
+  @include media-tablet {
+    width: 80%;
+  }
+
+  @include media-mobile { 
+    text-align: center;
+  }
 }
 
 .card__content_small {
   display: flex;
   justify-content: center;
   min-width: 243px;
+
+  @include media-tablet {
+    text-align: center;
+    padding: 0;
+    justify-content: center;
+  }
 }
 
 .card__title {
@@ -93,6 +124,10 @@ defineProps({
   font-family: 'Gothic A1', sans-serif;
   @include font(2.8rem, 3.5rem, 700, normal, normal);
   color: $text-color-main;
+
+  @include media-mobile {
+    @include font(2.0rem, 2.5rem, 700, normal, normal);
+  }
 }
 
 .card__description {
@@ -101,6 +136,10 @@ defineProps({
   font-family: 'Gothic A1', sans-serif;
   @include font(1.6rem, 2.6rem, 400, normal, normal);
   color: $text-color-secondary;
+
+  @include media-mobile {
+    @include font(1.5rem, 2rem, 400, normal, normal);
+  }
 }
 
 .description_medium {
@@ -111,9 +150,17 @@ defineProps({
   padding-top: 9px;
   max-width: 224px;
   min-height: 91px;
+
+  @include media-tablet {
+    margin: 0 auto;
+  }
 }
 
 .card__image {
   border-radius: 0px;
+
+  @include media-tablet {
+    width: 80%;
+  }
 }
 </style>
