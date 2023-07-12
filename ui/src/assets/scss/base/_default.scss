@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+#app {
+  min-height: 100vh;
+}
+
 .section__title {
   padding-top: 44px;
   text-align: center;

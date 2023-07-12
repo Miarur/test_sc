@@ -1,68 +1,171 @@
 <template>
-  <div class="navigation___block">
-    <img class="navigation___logo" src="@/assets/img/icons/logo.svg" alt="logo">
-    <nav class="navigation___menu">
-      <ul class="navigation___list">
-        <router-link class="navigation__link" to="/">Home</router-link>
-        <router-link class="navigation__link" :to="{ name: 'home', hash: '#about' }">About us</router-link>
-        <router-link class="navigation__link" :to="{ name: 'home', hash: '#frameworks'}">Frameworks</router-link>
-        <router-link class=" navigation__link" :to="{ name: 'home', hash: '#applications'}">Applications</router-link>
-        <router-link class="navigation__link" :to="{ name: 'home', hash: '#contacts'}">Contact us</router-link>
+  <nav class="navigation___menu">
+    <div class="branding">
+      <img class="navigation___logo" src="@/assets/img/icons/logo.svg" alt="logo">
+    </div>
+    <ul v-show="!props.mobile" class="navigation">
+      <li><router-link class="link" to="/">Home</router-link></li>
+      <li><router-link class="link" :to="{ name: 'home', hash: '#about' }">About us</router-link></li>
+      <li><router-link class="link" :to="{ name: 'home', hash: '#frameworks' }">Frameworks</router-link></li>
+      <li><router-link class="link" :to="{ name: 'home', hash: '#applications' }">Applications</router-link></li>
+      <li><router-link class="link" :to="{ name: 'home', hash: '#contacts' }">Contact us</router-link></li>
+    </ul>
+    <div class="icon">
+      <font-awesome-icon v-show="props.mobile" icon="bars" @click="toggleMobileNav" />
+    </div>
+    <transition name="mobile-nav">
+      <ul v-show="props.mobileNav" class="dropdown-nav">
+        <li><router-link class="link" to="/">Home</router-link></li>
+        <li><router-link class="link" :to="{ name: 'home', hash: '#about' }">About us</router-link></li>
+        <li><router-link class="link" :to="{ name: 'home', hash: '#frameworks' }">Frameworks</router-link></li>
+        <li><router-link class="link" :to="{ name: 'home', hash: '#applications' }">Applications</router-link></li>
+        <li><router-link class="link" :to="{ name: 'home', hash: '#contacts' }">Contact us</router-link></li>
       </ul>
-    </nav>
-  </div>
+    </transition>
+  </nav>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 
+const props = ref({
+  scrollPosition: null,
+  mobile: null,
+  mobileNav: null,
+  windowWidth: null,
+})
+
+const toggleMobileNav = () => {
+  props.value.mobileNav = !props.value.mobileNav;
+}
+
+const checkScreen = () => {
+  props.value.windowWidth = window.innerWidth;
+  if (props.value.windowWidth <= 750) {
+    props.value.mobile = true;
+    return;
+  }
+  props.value.mobile = false;
+  props.value.mobileNav = false;
+}
+
+onMounted(() => {
+  window.addEventListener('resize', checkScreen);
+  checkScreen();
+})
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/abstract/mixins';
 @import '@/assets/scss/abstract/variables';
 
-.navigation___block {
+nav {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
+  padding: 12px 0;
+  transition: .5s ease all;
+  width: 90%;
 
-.navigation___logo {
-  margin-left: 123px;
-  max-width: 197px;
-  min-height: 38px;
+  ul,
+  li {
+    font-size: 20px;
+    color: black;
+    list-style: none;
+    text-decoration: none;
+  }
 
-  @include media-tablet {
-    margin-left: 0px;
+  li {
+    text-transform: uppercase;
+    padding: 16px;
+    margin-left: 16px;
+  }
+
+  .link {
+    font-family: 'Roboto', sans-serif;
+    @include font(1.8rem, normal, 400, normal, normal);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $text-color-main;
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      color: $text-color-hover;
+    }
+  }
+
+  .branding {
+    display: flex;
+    align-items: center;
+
+    .navigation___logo {
+      margin-left: 123px;
+      max-width: 197px;
+      min-height: 38px;
+      transition: .5s ease all;
+
+      @include media-tablet {
+        margin-left: 0px;
+      }
+    }
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .icon {
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 24px;
+    height: 100%;
+    cursor: pointer;
+    transition: .8s ease all;
+
+    i {
+      cursor: pointer;
+      font-size: 24px;
+      transition: .8s ease all;
+    }
+  }
+
+  .icon-active {
+    transform: rotate(180deg);
   }
 }
 
-.navigation___menu {
-  width: 45%;
-}
-
-.navigation___list {
+.dropdown-nav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  list-style: none;
-}
+  max-width: 250px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $color-white;
 
-.navigation__link {
-  justify-content: space-between;
-  font-family: 'Roboto', sans-serif;
-  @include font(1.8rem, normal, 400, normal, normal);
-  text-transform: uppercase;
-  text-decoration: none;
-  color: $text-color-main;
-  transition: all .2s ease-in-out;
-
-  &:hover {
-    color: $text-color-hover;
+  li {
+    margin-left: 0;
   }
 }
-</style>
+
+.mobile-nav-enter-active,
+.mobile-nav-leave-active {
+  transition: 1s ease all;
+}
+
+.mobile-nav-enter-from,
+.mobile-nav-leave-to {
+  transform: translateX(-250px);
+}
+
+.mobile-nav-enter-to {
+  transform: translateX(0px);
+}</style>
